@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>Stocks Owned</th>
+                <th>No. of Shares Owned</th>
+                <th>Current Price</th>
+                <th>Total Value of Holding</th>
+                <th>Cash Balance</th>
+                <th>Grand Total</th>
+            </tr>
+        </thead>
+        <tbody>
+
+                {% for stock in stocks %}
+                    <tr>
+
+                        <td>{{ stock.symbol }}</td>
+                        <td>{{ stock.shares }}</td>
+                        <td>{{ stock_price[stock.symbol] | usd }}</td>
+                        <td>{{ total_value[stock.symbol] | usd }}</td>
+
+                        {% if loop.first %}
+
+                            <td>{{ cash.cash | usd }}</td>
+                            <td>{{ gt | usd }}</td>
+
+                        {% endif %}
+
+                    </tr>
+                {% endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}
